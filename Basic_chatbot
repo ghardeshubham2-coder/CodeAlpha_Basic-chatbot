@@ -1,0 +1,112 @@
+import datetime
+
+
+# Chatbot response function
+def chatbot_response(user_input, user_name):
+    user_input = user_input.lower().strip()
+
+    # Greetings
+    if user_input in ["hello", "hi", "hey"]:
+        return f"Hi {user_name}! Nice to meet you."
+
+    # How are you
+    elif user_input in ["how are you", "how are you?"]:
+        return "I'm fine, thanks! How are you?"
+
+    # Positive mood
+    elif user_input in ["good", "fine", "great", "i am good"]:
+        return "That's great to hear! 😊"
+
+    # Sad mood
+    elif user_input in ["sad", "i am sad", "not good"]:
+        return "I'm sorry to hear that. I hope your day gets better! ❤️"
+
+    # Name
+    elif user_input in ["what is your name", "your name"]:
+        return "I'm a Basic Python Chatbot."
+
+    # Time
+    elif user_input in ["time", "what is the time", "current time"]:
+        current_time = datetime.datetime.now().strftime("%I:%M %p")
+        return f"The current time is {current_time}."
+
+    # Date
+    elif user_input in ["date", "what is today's date", "today"]:
+        current_date = datetime.datetime.now().strftime("%d-%m-%Y")
+        return f"Today's date is {current_date}."
+
+    # Help
+    elif user_input == "help":
+        return (
+            "You can ask me:\n"
+            "- hello\n"
+            "- how are you\n"
+            "- what is your name\n"
+            "- time\n"
+            "- date\n"
+            "- good / sad\n"
+            "- bye"
+        )
+
+    # Thank you
+    elif user_input in ["thanks", "thank you"]:
+        return "You're welcome! 😊"
+
+    # Goodbye
+    elif user_input in ["bye", "goodbye", "exit", "quit"]:
+        return f"Goodbye {user_name}! Have a great day! 👋"
+
+    # Unknown input
+    else:
+        return "Sorry, I don't understand that. Type 'help' to see what I can do."
+
+
+# -----------------------------------
+# Start Chatbot
+# -----------------------------------
+
+print("======================================")
+print("        🤖 SMART BASIC CHATBOT")
+print("======================================")
+
+user_name = input("Bot: What is your name? ")
+
+if user_name.strip() == "":
+    user_name = "User"
+
+print(f"\nBot: Welcome, {user_name}! 👋")
+print("Bot: Type 'help' to see available commands.")
+print("Bot: Type 'bye' to exit.\n")
+
+
+# Conversation counter
+message_count = 0
+
+
+# Main chatbot loop
+while True:
+
+    user_input = input(f"{user_name}: ")
+
+    # Check empty input
+    if user_input.strip() == "":
+        print("Bot: Please type something.")
+        continue
+
+    message_count += 1
+
+    response = chatbot_response(user_input, user_name)
+
+    print("Bot:", response)
+
+    # Stop chatbot
+    if user_input.lower().strip() in ["bye", "goodbye", "exit", "quit"]:
+        break
+
+
+print("\n======================================")
+print("           CHAT SUMMARY")
+print("======================================")
+print(f"Total messages: {message_count}")
+print(f"Thank you for chatting, {user_name}! 🤖")
+print("======================================")
